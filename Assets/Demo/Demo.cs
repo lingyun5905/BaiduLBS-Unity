@@ -8,6 +8,8 @@ public class Demo : MonoBehaviour
     [SerializeField]
     private Text txtContent;
 
+    private string location;
+
     void Start()
     {
         LocationManager.Instance.SetAppKey(Configs.AppKey);
@@ -15,10 +17,10 @@ public class Demo : MonoBehaviour
         {
             LocationManager.Instance.ReqLocation(delegate (LocationInfo li)
             {
-                Debug.Log("data => " + JsonUtility.ToJson(li));
-                txtContent.text = JsonUtility.ToJson(li);
+                location = JsonUtility.ToJson(li);
+                txtContent.text = location;
+                Debug.Log("data => " + location);
             });
         });
     }
-
 }

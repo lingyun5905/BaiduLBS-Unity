@@ -1,28 +1,19 @@
-﻿#if UNITY_IPHONE
+#if UNITY_IPHONE
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XFramework;
 using UnityEditor.Callbacks;
 using UnityEditor;
 using UnityEditor.iOS.Xcode;
 using System.IO;
 
 public static class BaiduLocPostProcessBuild {
-	private static SDKConfig _SDKConfig;
-
 	[PostProcessBuildAttribute(90)]
 	public static void OnPostprocessBuild(BuildTarget buildTarget, string pathToBuiltProject)
 	{
 		// BuildTarget需为iOS
 		if (buildTarget != BuildTarget.iOS)
 			return;
-		_SDKConfig = Resources.Load<SDKConfig>("SDKConfig");
-		if (_SDKConfig == null)
-		{
-			Debug.LogError("SDKConfig.asset not found!");
-			return;
-		}
 		ModifyXCodeProj (pathToBuiltProject);
 		ModifyInfoPlist (pathToBuiltProject);
 	}
